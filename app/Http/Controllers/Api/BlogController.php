@@ -7,8 +7,9 @@ use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\BlogRequest;
-use App\Http\Requests\Api\UpdateBlogRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\Api\BlogResource;
+use App\Http\Requests\Api\UpdateBlogRequest;
 
 class BlogController extends Controller
 {
@@ -18,7 +19,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = BlogResource::collection( Blog::all());
+        $blogs = BlogResource::collection(Blog::all());
 
         return $this->success($blogs, 'Blogs fetched successfully', 200);
     }
@@ -28,10 +29,17 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
-        $blog = Blog::create($request->validated());
+        $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('blogs', 'public'); // Save in 'storage/app/public/blogs'
+        }
+
+        $blog = Blog::create($validated);
 
         return $this->success(BlogResource::make($blog), 'Blog created successfully', 201);
     }
+
 
     /**
      * Display the specified resource.
@@ -46,10 +54,23 @@ class BlogController extends Controller
      */
     public function update(UpdateBlogRequest $request, Blog $blog)
     {
-        $blog->update($request->validated());   
+        $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($blog->image) {
+                Storage::disk('public')->delete($blog->image);
+            }
+
+            // Save the new image
+            $validated['image'] = $request->file('image')->store('blogs', 'public');
+        }
+
+        $blog->update($validated);
 
         return $this->success(BlogResource::make($blog->refresh()), 'Blog updated successfully', 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
