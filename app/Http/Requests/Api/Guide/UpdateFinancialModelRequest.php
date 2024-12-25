@@ -22,10 +22,10 @@ class UpdateFinancialModelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'description' => ['required', 'string', 'min:2'],
-            'file' => ['required', 'file'],
-            'image' => ['required', 'image', 'mimes:jpg,png,jpeg,gif'],
+            'title' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'min:2'],
+            'file' => ['nullable', 'file'],
+            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif'],
         ];
     }
 }
