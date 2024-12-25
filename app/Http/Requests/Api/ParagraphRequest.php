@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TrainingRequest extends FormRequest
+class ParagraphRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class TrainingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
+            'blog_id' => ['required', 'exists:blogs,id'],
             'description' => ['required', 'string', 'min:2'],
-            'features' => ['required', 'string', 'min:2'],
+            'title' => ['required', 'string'],
         ];
     }
 }

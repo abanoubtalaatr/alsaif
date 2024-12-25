@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TrainingRequest extends FormRequest
+class AdvantageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class TrainingRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'description' => ['required', 'string', 'min:2'],
-            'features' => ['required', 'string', 'min:2'],
+            'image' => ['required', 'image', 'mimes:jpg,png,jpeg,gif'], 
         ];
     }
 }

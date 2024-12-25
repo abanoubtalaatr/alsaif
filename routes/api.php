@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\AboutUsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\ParagraphController;
 use App\Http\Controllers\Api\TrainingController;
 
 Route::get('/user', function (Request $request) {
@@ -11,3 +13,5 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource('blogs', BlogController::class);
 Route::apiResource('trainings', TrainingController::class);
+Route::apiResource('about-us', AboutUsController::class);
+Route::apiResource('paragraphs', ParagraphController::class)->only('store', 'update', 'destroy');
