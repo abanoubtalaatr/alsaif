@@ -45,3 +45,6 @@ Route::apiResource('clients', ClientController::class);
 
 Route::apiResource('testimonials', TestimonialController::class);
 Route::apiResource('bookings', BookingController::class);
+
+Route::apiResource('how-we-work-titles', SectionController::class)->only('index', 'store');
+Route::put('how-we-work-titles', [SectionController::class, 'update']);
