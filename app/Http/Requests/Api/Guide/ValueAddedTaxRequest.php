@@ -24,7 +24,7 @@ class ValueAddedTaxRequest extends FormRequest
         return [
             'title' => ['nullable', 'string'],
             'description' => ['nullable', 'string', 'min:2'],
-            'file' => ['nullable', 'file',  'max:2048'],
+            'file' => ['nullable', 'file'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif'],
         ];
     }

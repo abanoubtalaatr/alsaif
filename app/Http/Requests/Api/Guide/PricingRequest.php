@@ -24,7 +24,7 @@ class PricingRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'description' => ['required', 'string', 'min:2'],
-            'file' => ['required', 'file',  'max:2048'],
+            'file' => ['required', 'file'],
             'image' => ['required', 'image', 'mimes:jpg,png,jpeg,gif'],
         ];
     }
