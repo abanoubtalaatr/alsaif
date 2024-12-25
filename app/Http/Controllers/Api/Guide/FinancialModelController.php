@@ -19,9 +19,9 @@ class FinancialModelController extends Controller
      */
     public function index()
     {
-        $FinancialModels = FinancialModelResource::collection(FinancialModel::all());
+        $financialModel = FinancialModelResource::make(FinancialModel::first());
 
-        return $this->success($FinancialModels, 'FinancialModels fetched successfully', 200);
+        return $this->success($financialModel, 'FinancialModels fetched successfully', 200);
     }
 
     /**
@@ -55,8 +55,10 @@ class FinancialModelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFinancialModelRequest $request, FinancialModel $financial_model)
+    public function update(UpdateFinancialModelRequest $request)
     {
+        $financial_model = FinancialModel::first();
+
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -82,16 +84,5 @@ class FinancialModelController extends Controller
         $financial_model->update($validated);
 
         return $this->success(FinancialModelResource::make($financial_model->refresh()), 'FinancialModel updated successfully', 200);
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(FinancialModel $financial_model)
-    {
-        $financial_model->delete();
-
-        return $this->success(null, 'FinancialModel deleted successfully', 200);
     }
 }

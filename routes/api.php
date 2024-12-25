@@ -23,6 +23,12 @@ Route::put('about-us', [AboutUsController::class, 'update']);
 Route::apiResource('paragraphs', ParagraphController::class)->only('store', 'update', 'destroy');
 Route::apiResource('advantages', AdvantageController::class);
 Route::apiResource('packages', PackageController::class);
-Route::apiResource('financial-models', FinancialModelController::class);
-Route::apiResource('pricings', PricingController::class);
-Route::apiResource('value-added-taxes', ValueAddedTaxController::class);
+
+Route::apiResource('financial-models', FinancialModelController::class)->only('index', 'store');
+Route::put('financial-models', [FinancialModelController::class, 'update']);
+
+Route::apiResource('pricings', PricingController::class)->only('index', 'store');
+Route::put('pricings', [PricingController::class, 'update']);
+
+Route::apiResource('value-added-taxes', ValueAddedTaxController::class)->only('index', 'store');
+Route::put('value-added-taxes', [ValueAddedTaxController::class, 'update']);

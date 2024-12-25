@@ -19,9 +19,9 @@ class ValueAddedTaxController extends Controller
      */
     public function index()
     {
-        $valueAddedTaxs = ValueAddedTaxResource::collection(ValueAddedTax::all());
+        $valueAddedTax = ValueAddedTaxResource::make(ValueAddedTax::first());
 
-        return $this->success($valueAddedTaxs, 'ValueAddedTaxs fetched successfully', 200);
+        return $this->success($valueAddedTax, 'ValueAddedTaxs fetched successfully', 200);
     }
 
     /**
@@ -56,8 +56,10 @@ class ValueAddedTaxController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateValueAddedTaxRequest $request, ValueAddedTax $value_added_tax)
+    public function update(UpdateValueAddedTaxRequest $request)
     {
+        $value_added_tax = ValueAddedTax::first();
+
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -85,14 +87,4 @@ class ValueAddedTaxController extends Controller
         return $this->success(ValueAddedTaxResource::make($value_added_tax->refresh()), 'ValueAddedTax updated successfully', 200);
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ValueAddedTax $value_added_tax)
-    {
-        $value_added_tax->delete();
-
-        return $this->success(null, 'ValueAddedTax deleted successfully', 200);
-    }
 }

@@ -19,9 +19,9 @@ class PricingController extends Controller
      */
     public function index()
     {
-        $pricings = PricingResource::collection(Pricing::all());
+        $pricing = PricingResource::make(Pricing::first());
 
-        return $this->success($pricings, 'Pricings fetched successfully', 200);
+        return $this->success($pricing, 'Pricings fetched successfully', 200);
     }
 
     /**
@@ -56,8 +56,10 @@ class PricingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePricingRequest $request, Pricing $pricing)
+    public function update(UpdatePricingRequest $request)
     {
+        $pricing = Pricing::first();
+
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -83,16 +85,5 @@ class PricingController extends Controller
         $pricing->update($validated);
 
         return $this->success(PricingResource::make($pricing->refresh()), 'Pricing updated successfully', 200);
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pricing $pricing)
-    {
-        $pricing->delete();
-
-        return $this->success(null, 'Pricing deleted successfully', 200);
     }
 }
