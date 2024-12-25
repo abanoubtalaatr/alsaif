@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\AdvantageController;
+use App\Http\Controllers\Api\Home\WordController;
 use App\Http\Controllers\Api\ParagraphController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\Home\SectionController;
@@ -53,3 +54,6 @@ Route::put('how-we-work-titles', [HowWeWorkTitleController::class, 'update']);
 
 
 Route::apiResource('how-we-works', HowWeWorkController::class);
+
+Route::apiResource('words', WordController::class)->only('index', 'store');
+Route::put('words', [WordController::class, 'update']);
