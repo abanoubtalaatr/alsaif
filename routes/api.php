@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\AboutUsController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\AdvantageController;
@@ -43,3 +44,4 @@ Route::put('sections', [SectionController::class, 'update']);
 Route::apiResource('clients', ClientController::class);
 
 Route::apiResource('testimonials', TestimonialController::class);
+Route::apiResource('bookings', BookingController::class);
