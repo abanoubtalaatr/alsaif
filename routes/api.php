@@ -32,3 +32,7 @@ Route::put('pricings', [PricingController::class, 'update']);
 
 Route::apiResource('value-added-taxes', ValueAddedTaxController::class)->only('index', 'store');
 Route::put('value-added-taxes', [ValueAddedTaxController::class, 'update']);
+
+//Home page
+Route::apiResource('sections', PricingController::class)->only('index', 'store');
+Route::put('sections', [PricingController::class, 'update']);
