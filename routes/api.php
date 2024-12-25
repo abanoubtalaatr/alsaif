@@ -13,5 +13,6 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource('blogs', BlogController::class);
 Route::apiResource('trainings', TrainingController::class);
-Route::apiResource('about-us', AboutUsController::class);
+Route::apiResource('about-us', AboutUsController::class)->only('index', 'store');
+Route::put('about-us', [AboutUsController::class, 'update']);
 Route::apiResource('paragraphs', ParagraphController::class)->only('store', 'update', 'destroy');

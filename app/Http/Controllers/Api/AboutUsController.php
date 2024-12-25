@@ -18,7 +18,7 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        $AboutUs = AboutUsResource::collection(AboutUs::all());
+        $AboutUs = AboutUsResource::make(AboutUs::first());
 
         return $this->success($AboutUs, 'AboutUs fetched successfully', 200);
     }
@@ -51,8 +51,10 @@ class AboutUsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAboutUsRequest $request, AboutUs $about_u)
+    public function update(UpdateAboutUsRequest $request)
     {
+        $about_u = AboutUs::first();
+
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -70,14 +72,4 @@ class AboutUsController extends Controller
         return $this->success(AboutUsResource::make($about_u->refresh()), 'AboutUs updated successfully', 200);
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AboutUs $about_u)
-    {
-        $about_u->delete();
-
-        return $this->success(null, 'AboutUs deleted successfully', 200);
-    }
 }
