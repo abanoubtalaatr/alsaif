@@ -13,7 +13,9 @@ use App\Http\Controllers\Api\ParagraphController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\Home\SectionController;
 use App\Http\Controllers\Api\Guide\PricingController;
+use App\Http\Controllers\Api\Home\HowWeWorkController;
 use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
+use App\Http\Controllers\Api\Home\HowWeWorkTitleController;
 use App\Http\Controllers\Api\Guide\FinancialModelController;
 
 Route::get('/user', function (Request $request) {
@@ -46,5 +48,8 @@ Route::apiResource('clients', ClientController::class);
 Route::apiResource('testimonials', TestimonialController::class);
 Route::apiResource('bookings', BookingController::class);
 
-Route::apiResource('how-we-work-titles', SectionController::class)->only('index', 'store');
-Route::put('how-we-work-titles', [SectionController::class, 'update']);
+Route::apiResource('how-we-work-titles', HowWeWorkTitleController::class)->only('index', 'store');
+Route::put('how-we-work-titles', [HowWeWorkTitleController::class, 'update']);
+
+
+Route::apiResource('how-we-works', HowWeWorkController::class);
