@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ParagraphController;
 use App\Http\Controllers\Api\Guide\PricingController;
 use App\Http\Controllers\Api\Guide\FinancialModelController;
 use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
+use App\Http\Controllers\Api\Home\SectionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -34,5 +35,5 @@ Route::apiResource('value-added-taxes', ValueAddedTaxController::class)->only('i
 Route::put('value-added-taxes', [ValueAddedTaxController::class, 'update']);
 
 //Home page
-Route::apiResource('sections', PricingController::class)->only('index', 'store');
-Route::put('sections', [PricingController::class, 'update']);
+Route::apiResource('sections', SectionController::class)->only('index', 'store');
+Route::put('sections', [SectionController::class, 'update']);
