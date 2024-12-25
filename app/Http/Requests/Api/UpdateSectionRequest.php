@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlogRequest extends FormRequest
+class UpdateSectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class BlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'description' => ['required', 'string', 'min:2'],
-            'image' => ['required', 'image', 'mimes:jpg,png,jpeg,gif'],
+            'title' => ['nullable', 'string'],
+            'description' => ['nullable', 'string', 'min:2'],
+            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif'],
         ];
     }
 }
