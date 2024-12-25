@@ -21,7 +21,7 @@ class HowWeWorkTitleController extends Controller
      */
     public function index()
     {
-        $howWeWorkTitle = HowWeWorkTitle::make(HowWeWorkTitle::first());
+        $howWeWorkTitle = HowWeWorkTitleResource::make(HowWeWorkTitle::first());
 
         return $this->success($howWeWorkTitle, 'How we work title fetched successfully', 200);
     }
