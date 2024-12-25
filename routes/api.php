@@ -3,15 +3,16 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\AboutUsController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\AdvantageController;
 use App\Http\Controllers\Api\ParagraphController;
-use App\Http\Controllers\Api\Guide\PricingController;
-use App\Http\Controllers\Api\Guide\FinancialModelController;
-use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
 use App\Http\Controllers\Api\Home\SectionController;
+use App\Http\Controllers\Api\Guide\PricingController;
+use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
+use App\Http\Controllers\Api\Guide\FinancialModelController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -37,3 +38,5 @@ Route::put('value-added-taxes', [ValueAddedTaxController::class, 'update']);
 //Home page
 Route::apiResource('sections', SectionController::class)->only('index', 'store');
 Route::put('sections', [SectionController::class, 'update']);
+
+Route::apiResource('clients', ClientController::class);
