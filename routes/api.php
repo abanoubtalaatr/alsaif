@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\AdvantageController;
 use App\Http\Controllers\Api\ParagraphController;
+use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\Home\SectionController;
 use App\Http\Controllers\Api\Guide\PricingController;
 use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
@@ -40,3 +41,5 @@ Route::apiResource('sections', SectionController::class)->only('index', 'store')
 Route::put('sections', [SectionController::class, 'update']);
 
 Route::apiResource('clients', ClientController::class);
+
+Route::apiResource('testimonials', TestimonialController::class);
