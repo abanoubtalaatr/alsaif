@@ -22,7 +22,7 @@ class TestimonialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
+            'name' => ['required', 'string'],
             'description' => ['required', 'string', 'min:2'],
             'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif'],
         ];
