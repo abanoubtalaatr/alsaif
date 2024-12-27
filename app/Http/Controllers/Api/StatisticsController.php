@@ -43,40 +43,40 @@ class StatisticsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Statistics $statistics)
+    public function show(Statistics $statistic)
     {
-        return $this->success(StatisticsResource::make($statistics), 'Statistics fetched successfully', 200);
+        return $this->success(StatisticsResource::make($statistic), 'Statistics fetched successfully', 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStatisticsRequest $request, Statistics $statistics)
+    public function update(UpdateStatisticsRequest $request, Statistics $statistic)
     {
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
             // Delete the old image if it exists
-            if ($statistics->image) {
-                Storage::disk('public')->delete($statistics->image);
+            if ($statistic->image) {
+                Storage::disk('public')->delete($statistic->image);
             }
 
             // Save the new image
             $validated['image'] = $request->file('image')->store('Statistics', 'public');
         }
 
-        $statistics->update($validated);
+        $statistic->update($validated);
 
-        return $this->success(StatisticsResource::make($statistics->refresh()), 'Statistics updated successfully', 200);
+        return $this->success(StatisticsResource::make($statistic->refresh()), 'Statistics updated successfully', 200);
     }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Statistics $statistics)
+    public function destroy(Statistics $statistic)
     {
-        $statistics->delete();
+        $statistic->delete();
 
         return $this->success(null, 'Statistics deleted successfully', 200);
     }
