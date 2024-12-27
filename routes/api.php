@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\AdvantageController;
 use App\Http\Controllers\Api\Home\WordController;
 use App\Http\Controllers\Api\ParagraphController;
+use App\Http\Controllers\Api\StatisticsController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\Home\SectionController;
 use App\Http\Controllers\Api\Guide\PricingController;
@@ -57,3 +58,5 @@ Route::apiResource('how-we-works', HowWeWorkController::class);
 
 Route::apiResource('words', WordController::class)->only('index', 'store');
 Route::put('words', [WordController::class, 'update']);
+
+Route::apiResource('statistics', StatisticsController::class);
