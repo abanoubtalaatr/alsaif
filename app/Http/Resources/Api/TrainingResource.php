@@ -18,6 +18,7 @@ class TrainingResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'price' => $this->price,
             'description' => $this->description,
             'features' => $this->features,
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
