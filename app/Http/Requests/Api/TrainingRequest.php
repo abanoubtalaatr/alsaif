@@ -25,6 +25,7 @@ class TrainingRequest extends FormRequest
             'title' => ['required', 'string'],
             'description' => ['required', 'string', 'min:2'],
             'features' => ['required', 'string', 'min:2'],
+            'price' => ['nullable', 'string'],
         ];
     }
 }

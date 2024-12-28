@@ -23,6 +23,7 @@ class UpdateTrainingRequest extends FormRequest
     {
         return [
             'title' => ['nullable', 'string'],
+            'price' => ['nullable', 'string'],
             'description' => ['nullable', 'string', 'min:2'],
             'features' => ['nullable', 'string', 'min:2'],
         ];
