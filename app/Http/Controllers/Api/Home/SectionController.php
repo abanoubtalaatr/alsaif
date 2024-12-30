@@ -43,9 +43,9 @@ class SectionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Section $about_u)
+    public function show(Section $section)
     {
-        return $this->success(SectionResource::make($about_u), 'Section fetched successfully', 200);
+        return $this->success(SectionResource::make($section), 'Section fetched successfully', 200);
     }
 
     /**
@@ -53,23 +53,23 @@ class SectionController extends Controller
      */
     public function update(UpdateSectionRequest $request)
     {
-        $about_u = Section::first();
-
+        $section = Section::first();
+        
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
             // Delete the old image if it exists
-            if ($about_u->image) {
-                Storage::disk('public')->delete($about_u->image);
+            if ($section->image) {
+                Storage::disk('public')->delete($section->image);
             }
 
             // Save the new image
             $validated['image'] = $request->file('image')->store('Section', 'public');
         }
 
-        $about_u->update($validated);
+        $section->update($validated);
 
-        return $this->success(SectionResource::make($about_u->refresh()), 'Section updated successfully', 200);
+        return $this->success(SectionResource::make($section->refresh()), 'Section updated successfully', 200);
     }
 
 }
