@@ -41,6 +41,7 @@ Route::get('how-we-work-titles', [HowWeWorkTitleController::class, 'index']);
 Route::get('how-we-works', [HowWeWorkController::class, 'index']);
 Route::get('words', [WordController::class, 'index']);
 Route::get('statistics', [StatisticsController::class, 'index']);
+Route::apiResource('bookings', BookingController::class)->except('index');
 
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
@@ -61,7 +62,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('sections', [SectionController::class, 'update']);
     Route::apiResource('clients', ClientController::class)->except('index');
     Route::apiResource('testimonials', TestimonialController::class)->except('index');
-    Route::apiResource('bookings', BookingController::class)->except('index');
     Route::apiResource('how-we-work-titles', HowWeWorkTitleController::class)->except('index');
     Route::post('how-we-work-titles', [HowWeWorkTitleController::class, 'update']);
     Route::apiResource('how-we-works', HowWeWorkController::class)->except('index');
