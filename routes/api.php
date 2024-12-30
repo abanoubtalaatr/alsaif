@@ -58,7 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('value-added-taxes', ValueAddedTaxController::class)->except('index');
     Route::put('value-added-taxes', [ValueAddedTaxController::class, 'update']);
     Route::apiResource('sections', SectionController::class)->except('index');
-    Route::put('sections', [SectionController::class, 'update']);
+    Route::post('sections', [SectionController::class, 'update']);
     Route::apiResource('clients', ClientController::class)->except('index');
     Route::apiResource('testimonials', TestimonialController::class)->except('index');
     Route::apiResource('bookings', BookingController::class)->except('index');
