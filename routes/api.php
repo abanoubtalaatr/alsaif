@@ -50,7 +50,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('about-us', AboutUsController::class)->except('index');
     Route::post('about-us', [AboutUsController::class, 'update']);
     Route::apiResource('paragraphs', ParagraphController::class)->except('index');
-    Route::apiResource('advantages', AdvantageController::class)->except('index');
+    Route::apiResource('advantages', AdvantageController::class)->except('update');
+    Route::post('advantages/{advantage}', [AdvantageController::class, 'update']);
+    
     Route::apiResource('packages', PackageController::class)->except('index');
     Route::apiResource('financial-models', FinancialModelController::class)->except('index');
     Route::post('financial-models', [FinancialModelController::class, 'update']);
