@@ -26,6 +26,7 @@ Route::post('admin/login', [AuthController::class, 'login']);
 
 // Unauthenticated GET routes
 Route::get('blogs', [BlogController::class, 'index']);
+Route::get('blogs/{blog}', [BlogController::class, 'show']);
 Route::get('trainings', [TrainingController::class, 'index']);
 Route::get('about-us', [AboutUsController::class, 'index']);
 Route::get('paragraphs', [ParagraphController::class, 'index']);
@@ -46,7 +47,7 @@ Route::apiResource('bookings', BookingController::class)->except('index');
 
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('blogs', BlogController::class)->except('update','show');
+    Route::apiResource('blogs', BlogController::class)->except('update');
     Route::post('blogs/{blog}', [BlogController::class, 'update']);
     Route::apiResource('trainings', TrainingController::class)->except('index');
     Route::apiResource('about-us', AboutUsController::class)->except('index');
