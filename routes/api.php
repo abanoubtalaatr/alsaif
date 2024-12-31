@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\Home\HowWeWorkController;
 use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
 use App\Http\Controllers\Api\Home\HowWeWorkTitleController;
 use App\Http\Controllers\Api\Guide\FinancialModelController;
+use App\Models\Blog;
 
 Route::post('admin/login', [AuthController::class, 'login']);
 
@@ -46,6 +47,7 @@ Route::apiResource('bookings', BookingController::class)->except('index');
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('blogs', BlogController::class)->except('index');
+    Route::post('blogs/{blog}', [BlogController::class, 'update']);
     Route::apiResource('trainings', TrainingController::class)->except('index');
     Route::apiResource('about-us', AboutUsController::class)->except('index');
     Route::post('about-us', [AboutUsController::class, 'update']);
