@@ -48,28 +48,52 @@ Route::apiResource('bookings', BookingController::class)->except('index');
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('blogs', BlogController::class)->except('index');
     Route::post('blogs/{blog}', [BlogController::class, 'update']);
-    Route::apiResource('trainings', TrainingController::class)->except('index');
+
+    Route::apiResource('trainings', TrainingController::class)->except('update');
+    Route::post('trainings/{training}', [TrainingController::class, 'update']);
+
     Route::apiResource('about-us', AboutUsController::class)->except('index');
     Route::post('about-us', [AboutUsController::class, 'update']);
-    Route::apiResource('paragraphs', ParagraphController::class)->except('index');
+
+    Route::apiResource('paragraphs', ParagraphController::class)->except('update');
+    Route::post('paragraphs/{paragraph}', [ParagraphController::class, 'update']);
+
     Route::apiResource('advantages', AdvantageController::class)->except('update');
     Route::post('advantages/{advantage}', [AdvantageController::class, 'update']);
     
-    Route::apiResource('packages', PackageController::class)->except('index');
-    Route::apiResource('financial-models', FinancialModelController::class)->except('index');
+    Route::apiResource('packages', PackageController::class)->except('update');
+    Route::post('packages/{package}', [PackageController::class, 'update']);
+
+    Route::apiResource('financial-models', FinancialModelController::class)->except('update');
     Route::post('financial-models', [FinancialModelController::class, 'update']);
+
+
     Route::apiResource('pricings', PricingController::class)->except('index');
     Route::post('pricings', [PricingController::class, 'update']);
-    Route::apiResource('value-added-taxes', ValueAddedTaxController::class)->except('index');
+
+
+    Route::apiResource('value-added-taxes', ValueAddedTaxController::class)->except('update');
     Route::post('value-added-taxes', [ValueAddedTaxController::class, 'update']);
-    Route::apiResource('sections', SectionController::class)->except('index');
+
+
+    Route::apiResource('sections', SectionController::class)->except('update');
     Route::post('sections', [SectionController::class, 'update']);
-    Route::apiResource('clients', ClientController::class)->except('index');
-    Route::apiResource('testimonials', TestimonialController::class)->except('index');
+
+    Route::apiResource('clients', ClientController::class)->except('update');
+    Route::post('clients/{client}', [ClientController::class, 'update']);
+
+    Route::apiResource('testimonials', TestimonialController::class)->except('update');
+    Route::post('testimonials/{testimonial}', [TestimonialController::class, 'update']);
+
     Route::apiResource('how-we-work-titles', HowWeWorkTitleController::class)->except('index');
     Route::post('how-we-work-titles', [HowWeWorkTitleController::class, 'update']);
-    Route::apiResource('how-we-works', HowWeWorkController::class)->except('index');
+   
+    Route::apiResource('how-we-works', HowWeWorkController::class)->except('update');
+    Route::post('how-we-works/{how_we_work}', [HowWeWorkController::class, 'update']);
+
     Route::apiResource('words', WordController::class)->except('index');
     Route::post('words', [WordController::class, 'update']);
-    Route::apiResource('statistics', StatisticsController::class)->except('index');
+
+    Route::apiResource('statistics', StatisticsController::class)->except('update');
+    Route::post('statistics/{statistic}', [StatisticsController::class, 'update']);
 });
