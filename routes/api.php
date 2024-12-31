@@ -47,13 +47,13 @@ Route::apiResource('bookings', BookingController::class)->except('index');
 
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('blogs', BlogController::class)->except('update');
+    Route::apiResource('blogs', BlogController::class)->except(['index', 'show']);;
     Route::post('blogs/{blog}', [BlogController::class, 'update']);
     Route::apiResource('trainings', TrainingController::class)->except('index');
     Route::apiResource('about-us', AboutUsController::class)->except('index');
     Route::post('about-us', [AboutUsController::class, 'update']);
     Route::apiResource('paragraphs', ParagraphController::class)->except('index');
-    Route::apiResource('advantages', AdvantageController::class)->except('update');
+    Route::apiResource('advantages', AdvantageController::class)->except('index');
     Route::post('advantages/{advantage}', [AdvantageController::class, 'update']);
     
     Route::apiResource('packages', PackageController::class)->except('index');
