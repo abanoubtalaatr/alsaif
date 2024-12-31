@@ -46,7 +46,7 @@ Route::apiResource('bookings', BookingController::class)->except('index');
 
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('blogs', BlogController::class)->except('index');
+    Route::apiResource('blogs', BlogController::class)->except('update','show');
     Route::post('blogs/{blog}', [BlogController::class, 'update']);
     Route::apiResource('trainings', TrainingController::class)->except('index');
     Route::apiResource('about-us', AboutUsController::class)->except('index');
