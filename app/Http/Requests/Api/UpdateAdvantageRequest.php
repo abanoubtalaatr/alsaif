@@ -24,7 +24,7 @@ class UpdateAdvantageRequest extends FormRequest
         return [
             'title' => ['nullable', 'string'],
             'description' => ['nullable', 'string', 'min:2'],
-            'image' => ['nullable', 'image', 'mimes:jpg,png,jpeg,gif'], 
+            'image' => ['nullable'], 
         ];
     }
 }
