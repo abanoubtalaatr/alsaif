@@ -53,7 +53,7 @@ class BookingController extends Controller
 
             Mail::to($booking->email)->send(new BookingConfirmation($booking));
 
-        return $this->success(BookingResource::make($booking), 'Booking created successfully', 201);
+        return $this->success(BookingResource::make($booking), "تم حجز الجلسة بنجاح كود الجلسة : " . $numberOfBookings, 201);
     }
 
 
