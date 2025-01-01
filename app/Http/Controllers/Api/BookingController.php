@@ -80,12 +80,17 @@ class BookingController extends Controller
         $request->validate([
             'date' => ['required', 'date'], // Ensure the date is valid
         ]);
-
+    
         $date = $request->input('date');
-
+    
         // Fetch bookings for the given date
         $bookedTimes = Booking::whereDate('date', $date)->pluck('time');
-
+    
+        if ($bookedTimes->isEmpty()) {
+            return $this->success([], 'No bookings found for the specified date', 200);
+        }
+    
         return $this->success($bookedTimes, 'Bookings fetched successfully', 200);
     }
+    
 }
