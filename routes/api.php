@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlogController;
@@ -20,7 +19,7 @@ use App\Http\Controllers\Api\Home\HowWeWorkController;
 use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
 use App\Http\Controllers\Api\Home\HowWeWorkTitleController;
 use App\Http\Controllers\Api\Guide\FinancialModelController;
-use App\Models\Blog;
+
 
 Route::post('admin/login', [AuthController::class, 'login']);
 
@@ -74,3 +73,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('words', [WordController::class, 'update']);
     Route::apiResource('statistics', StatisticsController::class)->except('index');
 });
+Route::post('update/admin', [AuthController::class, 'updateAdmin']);
