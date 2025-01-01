@@ -17,7 +17,7 @@ class VideoResource extends JsonResource
         return [
             'id'=> $this->id,
             'is_enabled' =>(bool) $this->is_enabled,
-            'video' => $this->image ? asset('storage/' . $this->image) : null,  
+            'video' => $this->video ? asset('storage/' . $this->video) : null,  
         ];
     }
 }
