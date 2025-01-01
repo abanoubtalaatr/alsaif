@@ -45,7 +45,7 @@ Route::get('words', [WordController::class, 'index']);
 Route::get('videos', [VideoController::class, 'index']);
 Route::get('statistics', [StatisticsController::class, 'index']);
 Route::apiResource('bookings', BookingController::class)->except('index');
-Route::get('bookings/times', [BookingController::class, 'getBookedTimes']);
+
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('blogs', BlogController::class)->except(['index', 'show']);;
@@ -79,3 +79,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('statistics', StatisticsController::class)->except('index');
 });
 Route::post('update/admin', [AuthController::class, 'updateAdmin']);
+Route::get('times', [BookingController::class, 'getBookedTimes']);
