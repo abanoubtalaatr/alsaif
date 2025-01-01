@@ -63,8 +63,8 @@ class VideoController extends Controller
 
         if ($request->hasFile('video')) {
             // Delete the old image if it exists
-            if ($video->image) {
-                Storage::disk('public')->delete($video->image);
+            if ($video->video) {
+                Storage::disk('public')->delete($video->video);
             }
 
             // Save the new image
