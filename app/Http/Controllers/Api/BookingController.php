@@ -51,7 +51,7 @@ class BookingController extends Controller
 
             $booking = Booking::create($data);
 
-            Mail::to($booking->email)->send(new BookingConfirmation($booking));
+        // Mail::to($booking->email)->send(new BookingConfirmation($booking));
 
         return $this->success(BookingResource::make($booking), "تم حجز الجلسة بنجاح كود الجلسة : " . $numberOfBookings, 201);
     }
