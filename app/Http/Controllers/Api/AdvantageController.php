@@ -56,7 +56,7 @@ class AdvantageController extends Controller
     {
         $validated = $request->validated();
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image')  && !is_null($request->image) &&  $request->image != 'null') {
             // Delete the old image if it exists
             if ($advantage->image) {
                 Storage::disk('public')->delete($advantage->image);
