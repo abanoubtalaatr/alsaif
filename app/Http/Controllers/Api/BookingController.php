@@ -5,11 +5,15 @@ namespace App\Http\Controllers\Api;
 use App\Models\Booking;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\BookingRequest;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Api\BookingRequest;
 use App\Http\Resources\Api\BookingResource;
 use App\Http\Requests\Api\UpdateBookingRequest;
+use App\Mail\BookingConfirmation;
+
 
 class BookingController extends Controller
 {
@@ -32,10 +36,22 @@ class BookingController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('Bookings', 'public'); // Save in 'storage/app/public/Bookings'
+            $validated['image'] = $request->file('image')->store('Bookings', 'public');
         }
 
-        $booking = Booking::create($validated);
+        $lastBooking = Booking::orderBy('id', 'desc')->first();
+        $numberOfBookings = 3001;
+
+        if (!is_null($lastBooking)) {
+            $numberOfBookings = $lastBooking->number_of_bookings + 1;
+        }
+        $data = $validated;
+
+        $data['number_of_bookings'] = $numberOfBookings;
+
+            $booking = Booking::create($data);
+
+            Mail::to($booking->email)->send(new BookingConfirmation($booking));
 
         return $this->success(BookingResource::make($booking), 'Booking created successfully', 201);
     }
@@ -49,9 +65,6 @@ class BookingController extends Controller
         return $this->success(BookingResource::make($booking), 'Booking fetched successfully', 200);
     }
 
-    
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -60,5 +73,19 @@ class BookingController extends Controller
         $booking->delete();
 
         return $this->success(null, 'Booking deleted successfully', 200);
+    }
+
+    public function getBookedTimes(Request $request)
+    {
+        $request->validate([
+            'date' => ['required', 'date'], // Ensure the date is valid
+        ]);
+
+        $date = $request->input('date');
+
+        // Fetch bookings for the given date
+        $bookedTimes = Booking::whereDate('date', $date)->pluck('time');
+
+        return $this->success($bookedTimes, 'Bookings fetched successfully', 200);
     }
 }

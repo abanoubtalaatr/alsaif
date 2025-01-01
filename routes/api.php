@@ -19,7 +19,8 @@ use App\Http\Controllers\Api\Home\HowWeWorkController;
 use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
 use App\Http\Controllers\Api\Home\HowWeWorkTitleController;
 use App\Http\Controllers\Api\Guide\FinancialModelController;
-
+use App\Http\Controllers\Api\VideoController;
+use App\Models\Video;
 
 Route::post('admin/login', [AuthController::class, 'login']);
 
@@ -41,9 +42,10 @@ Route::get('bookings', [BookingController::class, 'index']);
 Route::get('how-we-work-titles', [HowWeWorkTitleController::class, 'index']);
 Route::get('how-we-works', [HowWeWorkController::class, 'index']);
 Route::get('words', [WordController::class, 'index']);
+Route::get('videos', [VideoController::class, 'index']);
 Route::get('statistics', [StatisticsController::class, 'index']);
 Route::apiResource('bookings', BookingController::class)->except('index');
-
+Route::get('bookings/times', [BookingController::class, 'getBookedTimes']);
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('blogs', BlogController::class)->except(['index', 'show']);;
@@ -71,6 +73,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('how-we-works', HowWeWorkController::class)->except('index');
     Route::apiResource('words', WordController::class)->except('index');
     Route::post('words', [WordController::class, 'update']);
+    Route::apiResource('videos', VideoController::class)->except('index');
+    Route::post('videos', [VideoController::class, 'update']);
+
     Route::apiResource('statistics', StatisticsController::class)->except('index');
 });
 Route::post('update/admin', [AuthController::class, 'updateAdmin']);
