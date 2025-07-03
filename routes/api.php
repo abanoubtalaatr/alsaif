@@ -1,12 +1,15 @@
 <?php
 
+use App\Models\Video;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\AboutUsController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\PackageController;
+use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\TrainingController;
 use App\Http\Controllers\Api\AdvantageController;
 use App\Http\Controllers\Api\Home\WordController;
@@ -15,14 +18,20 @@ use App\Http\Controllers\Api\StatisticsController;
 use App\Http\Controllers\Api\TestimonialController;
 use App\Http\Controllers\Api\Home\SectionController;
 use App\Http\Controllers\Api\Guide\PricingController;
+use App\Http\Controllers\Api\PasswordResetController;
 use App\Http\Controllers\Api\Home\HowWeWorkController;
 use App\Http\Controllers\Api\Guide\ValueAddedTaxController;
 use App\Http\Controllers\Api\Home\HowWeWorkTitleController;
 use App\Http\Controllers\Api\Guide\FinancialModelController;
-use App\Http\Controllers\Api\VideoController;
-use App\Models\Video;
 
 Route::post('admin/login', [AuthController::class, 'login']);
+
+// Password Reset Routes (Unauthenticated)
+Route::prefix('password')->group(function () {
+    Route::post('forgot', [PasswordResetController::class, 'sendOtp']);
+    Route::post('verify-otp', [PasswordResetController::class, 'verifyOtp']);
+    Route::post('reset', [PasswordResetController::class, 'resetPassword']);
+});
 
 // Unauthenticated GET routes
 Route::get('blogs', [BlogController::class, 'index']);
@@ -48,6 +57,11 @@ Route::apiResource('bookings', BookingController::class)->except('index');
 
 // Authenticated routes
 Route::middleware('auth:sanctum')->group(function () {
+    // Password Change Route (Authenticated)
+    Route::post('password/change', [PasswordResetController::class, 'changePassword']);
+    Route::get('settings', [SettingController::class, 'index']);
+    Route::post('settings', [SettingController::class, 'update']);
+    
     Route::apiResource('blogs', BlogController::class)->except(['index', 'show']);;
     Route::post('blogs/{blog}', [BlogController::class, 'update']);
     Route::apiResource('trainings', TrainingController::class)->except('index');

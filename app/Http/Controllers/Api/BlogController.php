@@ -17,10 +17,15 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = BlogResource::collection(Blog::all());
-
+        $blogs = Blog::query();
+        if ($request->has('search')) {
+            $blogs->where('title', 'like', '%' . $request->search . '%')
+            ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+        $blogs = $blogs->get();
+        $blogs = BlogResource::collection($blogs);
         return $this->success($blogs, 'Blogs fetched successfully', 200);
     }
 
